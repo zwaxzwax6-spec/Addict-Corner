@@ -28,7 +28,7 @@
   --ez:cubic-bezier(0.16,1,0.3,1);
 }
 
-html{scroll-behavior:smooth;scroll-snap-type:y proximity}
+html{scroll-behavior:smooth}
 body{font-family:var(--fb);background:var(--bg);color:var(--t);overflow-x:hidden;-webkit-font-smoothing:antialiased}
 
 /* Grain */
@@ -66,7 +66,7 @@ nav a:hover{opacity:1}
   position:relative;overflow:hidden;
   display:flex;align-items:center;justify-content:center;
   text-align:center;
-  scroll-snap-align:start;
+  
 }
 .s-hero-bg{
   position:absolute;inset:0;
@@ -146,7 +146,7 @@ nav a:hover{opacity:1}
   border-top:1px solid var(--b);border-bottom:1px solid var(--b);
   background:var(--bg2);
   overflow:hidden;
-  scroll-snap-align:start;
+  
 }
 .marquee-title{
   text-align:center;margin-bottom:3rem;
@@ -172,7 +172,7 @@ nav a:hover{opacity:1}
 .s-collection{
   min-height:100vh;
   padding:8rem 4rem 6rem;
-  scroll-snap-align:start;
+  
   position:relative;
 }
 /* Section side label */
@@ -328,7 +328,7 @@ nav a:hover{opacity:1}
   min-height:100vh;
   display:flex;align-items:center;
   position:relative;overflow:hidden;
-  scroll-snap-align:start;
+  
 }
 .s-editorial .bg{
   position:absolute;inset:0;
@@ -381,7 +381,7 @@ nav a:hover{opacity:1}
 .s-footer{
   padding:6rem 4rem 2rem;
   border-top:1px solid var(--b);
-  scroll-snap-align:start;
+  
 }
 .foot-top{
   max-width:1400px;margin:0 auto;
@@ -767,6 +767,26 @@ const ldInterval=setInterval(()=>{
   document.getElementById('ldCount').textContent=Math.floor(progress);
   document.getElementById('ldBar').style.width=progress+'%';
 },120);
+</script>
+<script src="https://unpkg.com/lenis@1.1.18/dist/lenis.min.js"></script>
+<script>
+const lenis = new Lenis({
+  duration: 1.4,
+  easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+  smoothWheel: true,
+  touchMultiplier: 1.5
+});
+function raf(time) {
+  lenis.raf(time);
+  requestAnimationFrame(raf);
+}
+requestAnimationFrame(raf);
+
+// Désactiver Lenis quand le modal est ouvert
+const origOpen = openMod;
+const origClose = clsMod;
+window.openMod = function(id) { lenis.stop(); origOpen(id); };
+window.clsMod = function() { lenis.start(); origClose(); };
 </script>
 </body>
 </html>
