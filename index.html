@@ -415,20 +415,22 @@ nav a:hover{opacity:1}
   position:fixed;inset:0;z-index:1000;
   background:rgba(4,5,7,0.94);
   backdrop-filter:blur(40px);
-  display:flex;align-items:center;justify-content:center;
-  padding:2rem;opacity:0;visibility:hidden;
+  display:flex;align-items:flex-start;justify-content:center;
+  padding:2rem;overflow-y:auto;-webkit-overflow-scrolling:touch;
+  opacity:0;visibility:hidden;
   transition:all 0.5s var(--ez);
 }
 .modal-bg.open{opacity:1;visibility:visible}
 .modal-box{
   background:var(--card);border:1px solid var(--bh);
-  max-width:480px;width:100%;max-height:88vh;
-  overflow-y:auto;position:relative;
+  max-width:480px;width:100%;max-height:90vh;
+  overflow-y:auto;-webkit-overflow-scrolling:touch;
+  position:relative;
   transform:translateY(20px) scale(0.96);
   transition:transform 0.6s var(--ez);
   box-shadow:0 0 100px rgba(77,168,218,0.05),0 30px 80px rgba(0,0,0,0.5);
 }
-.modal-bg.open .modal-box{transform:translateY(0) scale(1)}
+.modal-bg.open .modal-box{transform:translateY(0) scale(1);margin:auto}
 .modal-box::before{content:'';position:absolute;top:0;left:15%;right:15%;height:1px;background:linear-gradient(to right,transparent,var(--c),transparent);box-shadow:0 0 15px var(--cg);opacity:0.4}
 .mx{position:absolute;top:1rem;right:1rem;background:none;border:1px solid var(--b);color:var(--tm);font-size:0.75rem;cursor:pointer;width:26px;height:26px;display:flex;align-items:center;justify-content:center;transition:all 0.3s;z-index:10}
 .mx:hover{border-color:var(--c);color:var(--c);box-shadow:0 0 10px var(--cg)}
